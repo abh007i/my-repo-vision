@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Shield, Database, LogOut, Loader2 } from "lucide-react";
 
 const Index = () => {
-  const { accessToken, user, isLoading: authLoading, login, logout, isAuthenticated } = useGitHubAuth();
+  const { accessToken, user, isLoading: authLoading, showTokenInput, login, loginWithToken, logout, isAuthenticated } = useGitHubAuth();
   const { repositories, isLoading: reposLoading, error } = useRepositories(accessToken);
 
   if (!isAuthenticated) {
@@ -26,7 +26,12 @@ const Index = () => {
               Analyze your repositories for software composition insights and security vulnerabilities
             </p>
           </div>
-          <AuthButton onLogin={login} isLoading={authLoading} />
+          <AuthButton 
+            onLogin={login} 
+            onTokenLogin={loginWithToken}
+            isLoading={authLoading} 
+            showTokenInput={showTokenInput}
+          />
         </div>
       </div>
     );
